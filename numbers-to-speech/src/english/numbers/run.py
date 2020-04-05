@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # Import the required module for text
 # to speech conversion
-import getopt
-import sys
+import getopt, sys, os
 from random import randint
 from random import seed
 
@@ -32,7 +31,7 @@ def main(argv):
 def numbers(length):
     print("Spell numbers of length: " + str(length))
     p = inflect.engine()
-    seed(1)
+    seed(a=None, version=2)
     fr = 10 ** (length - 1)
     to = 10 ** length
     print("[" + str(fr) + "-" + str(to) + "]")
