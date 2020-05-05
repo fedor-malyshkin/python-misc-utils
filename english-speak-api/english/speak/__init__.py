@@ -21,18 +21,20 @@ def topic():
 
 @app.route('/phrasal_verbs')
 def phrasal_verbs():
-    count = int(request.args.get('count', '10'))
-    return jsonify(pv.get_exact_part(1))
+    count = int(request.args.get('count', '8'))
+    return jsonify(pv.get_exact_part(count))
 
 
 @app.route('/grammar')
 def grammar():
-    return jsonify(gt.get_exact_part(1))
+    count = int(request.args.get('count', '4'))
+    return jsonify(gt.get_exact_part(count))
 
 
 @app.route('/murphy')
 def murphy():
-    return jsonify(mt.get_exact_part(1))
+    count = int(request.args.get('count', '4'))
+    return jsonify(mt.get_exact_part(count))
 
 
 @app.route('/vocabulary/<string:topic_value>')
