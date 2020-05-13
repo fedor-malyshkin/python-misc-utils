@@ -10,6 +10,8 @@ BRITISH_ENGLISH = "British English"
 
 BRITISH_AND = "British and"
 
+AMERICAN_AND = "American and"
+
 AMERICAN_ENGLISH = "American English"
 
 FORMAL = "FORMAL"
@@ -27,11 +29,11 @@ def is_empty(value):
 
 
 def flat_file(file_name):
-    return storage.Storage(read_lines(file_name))
+    return storage.Storage(wrap_flat_records(read_lines(file_name)))
 
 
 def process_record(rec):
-    verb = rec.get("phrasal_verb")
+    verb = rec.get("name")
     details = []
     if verb.find(INFORMAL) != -1:
         verb = verb.replace(INFORMAL, "")
@@ -41,6 +43,9 @@ def process_record(rec):
         details.append(FORMAL)
     if verb.find(AMERICAN_ENGLISH) != -1:
         verb = verb.replace(AMERICAN_ENGLISH, "")
+        details.append("AmE")
+    if verb.find(AMERICAN_AND) != -1:
+        verb = verb.replace(AMERICAN_AND, "")
         details.append("AmE")
     if verb.find(BRITISH_AND) != -1:
         verb = verb.replace(BRITISH_AND, "")
@@ -55,7 +60,7 @@ def process_record(rec):
         verb = verb.replace(OFFENSIVE, "")
         details.append(OFFENSIVE)
 
-    rec.update({"phrasal_verb": verb.strip(), "details": ", ".join(details)})
+    rec.update({"name": verb.strip(), "note": ", ".join(details)})
     return rec
 
 
@@ -63,7 +68,7 @@ def flat_file_pairs(file_name):
     t = read_lines(file_name)
     data = []
     for e in list(zip(t[::2], t[1::2])):
-        rec = {"phrasal_verb": e[0], "meaning": e[1]}
+        rec = {"name": e[0], "meaning": e[1]}
         rec = process_record(rec)
         data.append(rec)
     return storage.Storage(data)
@@ -73,3 +78,7 @@ def read_lines(file_name):
     with open(file_name) as f:
         value = f.read().splitlines()
         return [rec for rec in value if not is_empty(rec)]
+
+
+def wrap_flat_records(records):
+    return [{"name": rec} for rec in records]
