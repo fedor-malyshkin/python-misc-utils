@@ -1,4 +1,4 @@
 #!/bin/sh
 
 . venv/bin/activate
-python ./src/english/numbers/run.py "$@"
+python ./english/numbers/run.py "$@"

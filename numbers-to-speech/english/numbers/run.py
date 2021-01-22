@@ -36,6 +36,10 @@ def main(argv):
         elif opt in ('-c', '--count'):
             count = int(arg)
 
+    if fun is None:
+        print('ru.py (-n <length>|-w <slow>) -c <repeat_count>')
+        sys.exit(2)
+
     for i in range(1, count + 1):
         print(str(i) + ": ", end="")
         fun()
@@ -46,7 +50,6 @@ def numbers(length):
     fr = 10 ** (length - 1)
     to = 10 ** length
     number = randint(fr, to)
-    # print(p.ordinal(1234))
     text_to_convert = p.number_to_words(number, andword="")
     print(str(number) + "->" + text_to_convert)
     say_it(text_to_convert, False)
@@ -64,10 +67,10 @@ def words(slow):
     # text_to_convert = fake.city()
     # text_to_convert = fake.postcode()
     # text_to_convert = fake.street_address()
-    text_to_convert = fake.street_name()
+    # text_to_convert = fake.street_name()
     # text_to_convert = fake.iban()
     # text_to_convert = fake.first_name()
-    # text_to_convert = fake.last_name()
+    text_to_convert = fake.last_name()
     # text_to_convert = fake.name()
     # text_to_convert = fake.cellphone_number()
     print(text_to_convert)
