@@ -1,6 +1,0 @@
-gTTS
- playsound
- vext
- vext.gi
- inflect
- Faker

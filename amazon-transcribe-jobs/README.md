@@ -1,6 +1,3 @@
-## Requirements
-Python 3
-
 ## Create + activate virtual environment
 ```sh
 python3 -m venv venv
